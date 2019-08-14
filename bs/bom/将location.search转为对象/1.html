@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      var search="?uname=dingding&upwd=123456&favs=swimming&fava=running&favs=baskeball";
+      function searchObj(str){
+          //创建新的空对象
+          var obj={};
+          //去掉str的开头的?
+          str=str.slice(1);
+          //按&切割str
+          var arr=str.split("&");
+          //遍历arr中每个字符串
+          for(var s of arr){
+              //按=切割每个子字符串,然后,将切割后第一部分保存在变量key中,将切割后第二部分保存在变量value中
+              var [key,value]=s.split("=");
+              //如果obj中不包含key为下标的属性
+              if(obj[key]===undefined){
+                  //就强行给obj添加key为下标的属性,并赋值
+                  obj[key]=value;
+              }else{//否则,如果obj中已包含key为下标 的属性
+              //就取出obj中key属性的值,和新值value拼成一个新数组,再放回obj中key属性保存
+                  obj[key]=[].concat(obj[key],value);
+              }
+          }
+          return obj;//返回obj
+      }
+      var obj=searchObj(search);
+      console.log(obj);
+    </script>
+</body>
+</html>
